@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+It is a 4 bit digital multiplier
 
 ## How to test
 
-Explain how to use your project
+send in two 4 bit digital values and read the 8 bit outputs
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+you can use LEDs but honestly just pins will work
