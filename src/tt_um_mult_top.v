@@ -38,17 +38,17 @@ end
 //assign inputs
 always @(*) begin
 	if(!rst_n_2) begin
-		A <= {4{1'b0}};
-		B <= {4{1'b0}};
+		A = {4{1'b0}};
+		B = {4{1'b0}};
 	end
 	else begin
 		if(ena_1)begin
-			A <= ui_in_1[7:4];
-			B <= ui_in_1[3:0];
+			A = ui_in_1[7:4];
+			B = ui_in_1[3:0];
 		end
 		else begin
-			A <= {4{1'b0}};
-			B <= {4{1'b0}};
+			A = {4{1'b0}};
+			B = {4{1'b0}};
 		end
 		
 	end
