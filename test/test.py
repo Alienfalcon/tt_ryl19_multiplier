@@ -29,12 +29,21 @@ async def test_project(dut):
 
     # Set the input values you want to test
     for i in range(0,1000):
-        A = int(random.random()*3)<<4;
-        B = int(random.random()*3);
+        A = LogicArray('0000', Range(7, 'downto' 0))
+        B = LogicArray('0000', Range(7, 'downto' 0))
+        for j in range(0,4):
+            A = int(random.random()>0.5) + A;
+            B = int(random.random()>0.5) + B;
         u_in = A+B;
+        A_int = int(A)
+        B_int = int(B)
+        P_int = A_int * B_int
+        P = LogicArray('00000000', Range(7, 'downto' 0))
+        P.value = P_int
+
         dut.ui_in.value = u_in;
         await ClockCycles(dut.clk, 2);
-        assert dut.uo_out.value == (A*B);
+        assert dut.uo_out.value == P.value;
 
 
     # Keep testing the module by changing the input values, waiting for
