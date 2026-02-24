@@ -26,7 +26,7 @@ assign uio_out = {8{1'b0}};
 assign uio_oe = {8{1'b0}};
 
 //cascade inputs
-reg [7:0] ui_in_1, uio_in_1;
+reg [7:0] ui_in_1;
 reg ena_1, rst_n_1, rst_n_2;
 always @(posedge clk)begin
 	ui_in_1 <= ui_in;
