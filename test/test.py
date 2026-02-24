@@ -28,7 +28,7 @@ async def test_project(dut):
     dut._log.info("Test project behavior")
 
     # Set the input values you want to test
-    for(i in range(0,1000)):
+    for i in range(0,1000):
         A = int(random.random()*3)<<4;
         B = int(random.random()*3);
         u_in = A+B;
