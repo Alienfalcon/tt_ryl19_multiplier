@@ -1,4 +1,3 @@
-//DO NOT CHANGE MODULE INPUTS AND OUTPUTS
 module tt_um_mult_top(
 	input wire [7:0] ui_in,
 	output wire [7:0] uo_out,
