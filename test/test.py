@@ -42,15 +42,17 @@ async def test_project(dut):
         A_int = int(A) >> 4
         B_int = int(B)
         P_int = A_int * B_int
-        P = cocotb.types.LogicArray.from_unsigned(0x00, 4)
+        P = cocotb.types.LogicArray.from_unsigned(0x00, 8)
         P.value = P_int
         
         dut.ui_in.value = u_in
-
+        output = cocotb.types.LogicArray.from_unsigned(0x00, 8)
         await ClockCycles(dut.clk, 2)
-        output = (dut.uo_out.value)
-        correct = (P.value == output) + correct
-        assert (P.value == output)
+        output.value = dut.uo_out.value
+        dut._log.info("output")
+        dut._log.info(dut.uo_out.value)
+        correct = (P.value == output.value) + correct
+        assert (P.value == output.value)
 
     fin_out_str = f"{correct} out of 1000 tests have succeeded"
     dut._log.info(fin_out_str)
