@@ -30,20 +30,20 @@ async def test_project(dut):
 
     # Set the input values you want to test
     for i in range(0,1000):
-        A = cocotb.types.LogicArray.from_unsigned(0x00, 4)
-        B = cocotb.types.LogicArray.from_unsigned(0x00, 4)
+        A = cocotb.types.LogicArray.from_unsigned(0x00, 8)
+        B = cocotb.types.LogicArray.from_unsigned(0x00, 8)
         
         for j in range(0,4):
-            A = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<j,4) | A;
-            B = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<j,4) | B;
-        u_in = A+B;
+            A = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<(j+4),8) | A;
+            B = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<j,8) | B;
+        u_in = A | B;
         logger.debug("u_in")
         logger.debug(u_in)
         logger.debug("A")
         logger.debug(A)
         logger.debug("B")
         logger.debug(B)
-        A_int = int(A)
+        A_int = int((A>>4))
         B_int = int(B)
         P_int = A_int * B_int
         P = cocotb.types.LogicArray.from_unsigned(0x00, 4)
