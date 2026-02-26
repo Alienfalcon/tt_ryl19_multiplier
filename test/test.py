@@ -34,8 +34,8 @@ async def test_project(dut):
         B = cocotb.types.LogicArray.from_unsigned(0x00, 4)
         
         for j in range(0,4):
-            A = (random.random()>0.5)<<j + A;
-            B = (random.random()>0.5)<<j + B;
+            A = cocotb.type.LogicArray.from_unsigned((random.random()>0.5)<<j,4) | A;
+            B = cocotb.type.LogicArray.from_unsigned((random.random()>0.5)<<j,4) | B;
         u_in = A+B;
         logger.debug("u_in")
         logger.debug(u_in)
@@ -46,7 +46,7 @@ async def test_project(dut):
         A_int = int(A)
         B_int = int(B)
         P_int = A_int * B_int
-        P = LogicArray('00000000', Range(7, 'downto', 0))
+        P = cocotb.types.LogicArray.from_unsigned(0x00, 4)
         P.value = P_int
 
         dut.ui_in.value = u_in;
