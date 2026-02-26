@@ -14,11 +14,12 @@ async def test_project(dut):
     # Set the clock period to 10 us (100 KHz)
     clock = Clock(dut.clk, 10, unit="us")
     cocotb.start_soon(clock.start())
+    
+    
+    # Reset
+    dut._log.info("Reset")
     #create output variable
     output = cocotb.types.LogicArray.from_unsigned(0x00, 8)
-    # Reset
-    
-    dut._log.info("Reset")
     #Turn on the module
     dut.ena.value = 1
     #Set inputs to module
@@ -59,8 +60,8 @@ async def test_project(dut):
         correct = (P.value == output.value) + correct
         #test if output matches expected value
         assert (P.value == output.value)
-
+        
+    #print out final statement
     fin_out_str = f"{correct} out of 1000 tests have succeeded"
     dut._log.info(fin_out_str)
-    # Keep testing the module by changing the input values, waiting for
-    # one or more clock cycles, and asserting the expected output values.
+
