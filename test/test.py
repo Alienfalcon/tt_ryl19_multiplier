@@ -30,8 +30,8 @@ async def test_project(dut):
 
     # Set the input values you want to test
     for i in range(0,1000):
-        A = cocotb.types.LogicArray('0000', Range(7, 'downto', 0))
-        B = cocotb.types.LogicArray('0000', Range(7, 'downto', 0))
+        A = cocotb.types.LogicArray('0000', range(7, 'downto', 0))
+        B = cocotb.types.LogicArray('0000', range(7, 'downto', 0))
         
         for j in range(0,4):
             A = (random.random()>0.5)<<j + A;
