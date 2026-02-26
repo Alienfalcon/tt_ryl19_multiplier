@@ -47,10 +47,23 @@ async def test_project(dut):
         
         dut.ui_in.value = u_in
         output = cocotb.types.LogicArray.from_unsigned(0x00, 8)
-        await ClockCycles(dut.clk, 2)
+        await ClockCycles(dut.clk, 1)
         output.value = dut.uo_out.value
-        dut._log.info("output")
+        dut._log.info("output clk1")
         dut._log.info(dut.uo_out.value)
+        await ClockCycles(dut.clk, 1)
+        output.value = dut.uo_out.value
+        dut._log.info("output clk2")
+        dut._log.info(dut.uo_out.value)
+        await ClockCycles(dut.clk, 1)
+        output.value = dut.uo_out.value
+        dut._log.info("output clk3")
+        dut._log.info(dut.uo_out.value)
+        await ClockCycles(dut.clk, 1)
+        output.value = dut.uo_out.value
+        dut._log.info("output clk4")
+        dut._log.info(dut.uo_out.value)
+        
         correct = (P.value == output.value) + correct
         assert (P.value == output.value)
 
