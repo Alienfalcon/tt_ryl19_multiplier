@@ -26,6 +26,7 @@ async def test_project(dut):
     dut.uio_in.value = 0
     #Reset the module
     dut.rst_n.value = 0
+    #wait 10 clk cycles then continue
     await ClockCycles(dut.clk, 10)
     #Turn off reset
     dut.rst_n.value = 1
