@@ -34,8 +34,8 @@ async def test_project(dut):
         B = cocotb.types.LogicArray.from_unsigned(0x00, 4)
         
         for j in range(0,4):
-            A = cocotb.type.LogicArray.from_unsigned((random.random()>0.5)<<j,4) | A;
-            B = cocotb.type.LogicArray.from_unsigned((random.random()>0.5)<<j,4) | B;
+            A = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<j,4) | A;
+            B = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<j,4) | B;
         u_in = A+B;
         logger.debug("u_in")
         logger.debug(u_in)
