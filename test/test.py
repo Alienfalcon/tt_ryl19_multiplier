@@ -29,8 +29,8 @@ async def test_project(dut):
 
     # Set the input values you want to test
     for i in range(0,1000):
-        A = LogicArray('0000', Range(7, 'downto', 0))
-        B = LogicArray('0000', Range(7, 'downto', 0))
+        A = cocotb.LogicArray('0000', Range(7, 'downto', 0))
+        B = cocotb.LogicArray('0000', Range(7, 'downto', 0))
         for j in range(0,4):
             A = int(random.random()>0.5) + A;
             B = int(random.random()>0.5) + B;
