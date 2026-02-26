@@ -11,7 +11,7 @@ from cocotb.triggers import ClockCycles
 @cocotb.test()
 async def test_project(dut):
     dut._log.info("Start")
-    logger = logging.getLogger("my_testbench")
+    
     # Set the clock period to 10 us (100 KHz)
     clock = Clock(dut.clk, 10, unit="us")
     cocotb.start_soon(clock.start())
@@ -27,7 +27,7 @@ async def test_project(dut):
     dut.rst_n.value = 1
 
     dut._log.info("Test project behavior")
-
+    correct = 0
     # Set the input values you want to test
     for i in range(0,1000):
         A = cocotb.types.LogicArray.from_unsigned(0x00, 8)
@@ -37,23 +37,20 @@ async def test_project(dut):
             A = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<(j+4),8) | A;
             B = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<j,8) | B;
         u_in = A | B;
-        logger.info("u_in")
-        logger.info(u_in)
-        logger.info("A")
-        logger.info(A)
-        logger.info("B")
-        logger.info(B)
+        
         A_int = int(A) >> 4
         B_int = int(B)
         P_int = A_int * B_int
         P = cocotb.types.LogicArray.from_unsigned(0x00, 4)
         P.value = P_int
-        logger.info("P")
-        logger.info(P.value)
-        dut.ui_in.value = u_in;
-        await ClockCycles(dut.clk, 2);
-        assert (P.value == dut.uo_out.value);
+        
+        dut.ui_in.value = u_in
 
+        await ClockCycles(dut.clk, 2)
+        correct = (P.value == dut.uo_out.value) + correct
+        assert (P.value == dut.uo_out.value)
 
+    fin_out_str = f"{correct} out of 1000 tests have succeeded"
+    dut._log.info(fin_out_str)
     # Keep testing the module by changing the input values, waiting for
     # one or more clock cycles, and asserting the expected output values.
