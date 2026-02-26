@@ -37,21 +37,22 @@ async def test_project(dut):
             A = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<(j+4),8) | A;
             B = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<j,8) | B;
         u_in = A | B;
-        logger.debug("u_in")
-        logger.debug(u_in)
-        logger.debug("A")
-        logger.debug(A)
-        logger.debug("B")
-        logger.debug(B)
+        logger.info("u_in")
+        logger.info(u_in)
+        logger.info("A")
+        logger.info(A)
+        logger.info("B")
+        logger.info(B)
         A_int = int(A) >> 4
         B_int = int(B)
         P_int = A_int * B_int
         P = cocotb.types.LogicArray.from_unsigned(0x00, 4)
         P.value = P_int
-
+        logger.info("P")
+        logger.info(P.value)
         dut.ui_in.value = u_in;
         await ClockCycles(dut.clk, 2);
-        assert 1;
+        assert (P.value == dut.uo_out.value);
 
 
     # Keep testing the module by changing the input values, waiting for
