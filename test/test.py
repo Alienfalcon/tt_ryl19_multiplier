@@ -48,8 +48,9 @@ async def test_project(dut):
         dut.ui_in.value = u_in
 
         await ClockCycles(dut.clk, 2)
-        correct = (P.value == dut.uo_out.value) + correct
-        assert (P.value == dut.uo_out.value)
+        output = int(dut.uo_out.value)
+        correct = (P_int == output) + correct
+        assert (P_int == output)
 
     fin_out_str = f"{correct} out of 1000 tests have succeeded"
     dut._log.info(fin_out_str)
