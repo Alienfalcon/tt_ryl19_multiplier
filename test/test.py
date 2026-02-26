@@ -3,7 +3,6 @@
 
 import cocotb
 import random
-import logging
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 
