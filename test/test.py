@@ -43,7 +43,7 @@ async def test_project(dut):
         logger.debug(A)
         logger.debug("B")
         logger.debug(B)
-        A_int = int((A>>4))
+        A_int = int(A) >> 4
         B_int = int(B)
         P_int = A_int * B_int
         P = cocotb.types.LogicArray.from_unsigned(0x00, 4)
