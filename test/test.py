@@ -37,7 +37,8 @@ async def test_project(dut):
             A = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<(j+4),8) | A;
             B = cocotb.types.LogicArray.from_unsigned((random.random()>0.5)<<j,8) | B;
         u_in = A | B;
-        
+        dut._log.info("U_IN")
+        dut._log.info(u_in)
         A_int = int(A) >> 4
         B_int = int(B)
         P_int = A_int * B_int
