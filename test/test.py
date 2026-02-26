@@ -32,10 +32,17 @@ async def test_project(dut):
     for i in range(0,1000):
         A = cocotb.LogicArray('0000', Range(7, 'downto', 0))
         B = cocotb.LogicArray('0000', Range(7, 'downto', 0))
+        
         for j in range(0,4):
-            A = int(random.random()>0.5) + A;
-            B = int(random.random()>0.5) + B;
+            A = (random.random()>0.5)<<j + A;
+            B = (random.random()>0.5)<<j + B;
         u_in = A+B;
+        logger.debug("u_in")
+        logger.debug(u_in)
+        logger.debug("A")
+        logger.debug(A)
+        logger.debug("B")
+        logger.debug(B)
         A_int = int(A)
         B_int = int(B)
         P_int = A_int * B_int
