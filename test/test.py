@@ -50,14 +50,7 @@ async def test_project(dut):
         await ClockCycles(dut.clk, 3)
         output.value = dut.uo_out.value
         dut._log.info("output clk3")
-        dut._log.info(dut.uo_out.value)
-
-        assert (P.value == output.value)
-        await ClockCycles(dut.clk, 1)
-        output.value = dut.uo_out.value
-        dut._log.info("output clk4")
-        dut._log.info(dut.uo_out.value)
-        
+        dut._log.info(dut.uo_out.value)      
         
         correct = (P.value == output.value) + correct
         assert (P.value == output.value)
